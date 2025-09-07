@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            line-height: 1.6;
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            background-color: #f9f6f0;
+            color: #333;
+        }
+        
+        /* Halaman pertama */
+        .container1 {
+            width: 100%;
+            max-width: 393px;
+            min-height: 100vh;
+            margin: 0 auto;
+            padding: 20px;
+            background-image: url('desain%2010.png');
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); 
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title {
+            font-family: Allura, cursive;
+            padding: 10px;
+            margin-top: 20px;
+            color: #766425;
+            font-size: 28px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: fadeInUp 2s forwards;
+        }
+
+        .tanggal {
+            font-size: 16px;
+            font-family: 'Courier New', Courier, monospace;
+            margin-top: 10px;
+        }
+
+        .bridegroom-names {
+            font-size: 32px;
+            border-radius: 20px;
+            padding: 15px;
+            min-height: 250px;
+            width: 90%;
+            max-width: 190px;
+            background-color: #6F8260;
+            font-family: 'Allura', cursive;
+            margin: 15px auto;
+            color: rgb(255, 255, 255);
+            opacity: 0; 
+            transform: scale(0.8); 
+            animation: fadeInZoom 2s forwards;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .open-button {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 15px 25px;
+            margin: 20px auto;
+            background-color: #6F8260;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1em;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 2s 0.5s forwards;
+            border-radius: 25px;
+            cursor: pointer;
+            display: inline-block;
+            transition: background-color 0.3s;
+            border: none;
+            text-align: center;
+        }
+        
+        .open-button:hover {
+            background-color: #404e34;
+        }
+
+        .p {
+            font-size: 14px;
+            margin: 20px 0;
+            color: #766425;
+            text-align: center;
+        }
+
+        .decoration1, .decoration2, .decoration3, .decoration4 {
+            position: absolute;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .decoration1 {
+            top: 55%;
+            left: 71%;
+            width: 320px; 
+            transform: translate(-50%, -50%);
+        }
+
+        .decoration2 {
+            top: 29%;
+            left: 50%;
+            width: 200px; 
+            transform: translate(-50%, -50%);
+        }
+
+        .decoration3 {
+            top: 55%;
+            left: 50%;
+            width: 200px; 
+            transform: translate(-50%, -50%);
+        }
+
+        .decoration4 {
+            bottom: -32%;
+            left: 73%;
+            width: 276px; 
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInZoom {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Halaman lainnya - initially hidden */
+        .other-pages {
+            display: none;
+            width: 100%;
+        }
+
+        .other-pages.visible {
+            display: block;
+            animation: slideInFromTop 1s ease-out;
+        }
+
+        @keyframes slideInFromTop {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* Container untuk halaman lainnya */
+        .page-container {
+            width: 100%;
+            max-width: 393px;
+            margin: 0 auto;
+            padding: 20px;
+            background-image: url('desain%2010.png');
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .decoration5 {
+         width: 276px;
+         transform: translate(30%, 20%);
+        }
+
+        /*Halaman kedua*/
+        .second-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 15px;
+            color: #766425;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .second-page h2 {
+            font-size: 20px;
+            margin-top: 100px;
+        }
+
+        .second-page h3 {
+            font-size: 16px;
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+
+        .second-page p {
+            font-size: 14px;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        /* Halaman 3 */
+        .invitation-container {
+            padding: 0px;
+            text-align: center;
+        }
+
+        .name{
+            color:#766425;
+            font-size: 15px;
+            margin: 10px 0;
+        }
+
+        .names h3 {
+            font-family: Allura, cursive;
+            font-size: 26px;
+            color: #766425;
+            margin-bottom: 10px;
+        }
+
+        .names p {
+            font-size: 14px;
+            color: #766425;
+            margin-bottom: 20px;
+        }
+
+        .photo-section {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .photo-frame {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .photo-frame .placeholder-img {
+            width: 120px;
+            height: 120px;
+        }
+
+        .and-symbol {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            color: #766425;
+            background: #f9f6f0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Halaman Keempat */
+        .content {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Allura', cursive;
+            font-size: 26px;
+            color: #766425;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background-color: #766425;
+            margin: 8px auto 15px auto;
+        }
+
+        .text4{
+            margin-bottom: 10px;
+            color: #766425;
+            font-size: 15px;  
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /*halaman kelima*/
+        .gallery-section {
+            padding: 20px 10px;
+            text-align: center;
+        }
+
+        .gallery-title {
+            font-size: 30px;
+            font-family: 'Allura', cursive;
+            color: #766425;
+            margin-bottom: 20px;
+        }
+
+        /* Grid Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .gallery-item {
+            position: relative;
+            background: linear-gradient(rgba(2, 44, 13, 0.5), rgba(202, 200, 200, 0.5));
+            padding: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .gallery-link {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: #8b6f45;
+            text-decoration: none;
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+        }
+
+        /*Halaman Keenam*/
+        .thankyou-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .thankyou-subtext {
+            font-size: 16px;
+            color: #766425;
+            font-style: oblique;
+            line-height: 1.6;
+        }
+
+        /* halaman Countdown */
+        .countdown-page {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .h11{
+            color: #766425;
+            font-size: 30px;
+            font-family: 'Allura', cursive;
+            margin-bottom: 10px;
+        }
+
+        .h12{
+            color:#766425;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .h13{
+            color: #766425;
+            font-size: 14px;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            font-size: 16px;
+            text-align: center;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .countdown-timer div {
+            background: linear-gradient(rgba(17, 83, 35, 0.5), rgba(202, 200, 200, 0.5));
+            border: 2px solid #ddd;
+            width: 70px;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .countdown-timer span {
+            font-weight: bold;
+            color: #6F8260;
+        }
+
+        #days,#hours,#minutes,#seconds{
+            color: #766425;
+        }
+
+        .love-story-container {
+            width: 100%;
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        .title-section h3 {
+            color:#766425;
+            font-family: 'Allura', cursive;
+            font-size: 30px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .image-section {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .date-section h2 {
+            font-size: 1.5em;
+            margin: 15px 0;
+            color: #6F8260;
+            text-align: center;
+        }
+
+        .quote-section p {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #766425;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        /* halaman rsvp*/
+        .rsvp-page {
+            padding: 15px;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        .rsvp-page h2 {
+            margin: 20px 0;
+            font-family: 'Allura', cursive;
+            font-size: 30px;
+            color: #766425;
+            text-align: center;
+        }
+
+        .rsvp-text {
+            font-family: 'Georgia', serif;
+            font-size: 14px;
+            color: #766425;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .rsvp-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rsvp-form label {
+            font-family: 'Georgia', serif;
+            font-size: 15px;
+            color: #766425;
+            margin-top: 12px;
+        }
+
+        .rsvp-form input[type="text"],
+        .rsvp-form input[type="email"],
+        .rsvp-form input[type="number"],
+        .rsvp-form select,
+        .rsvp-form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 15px;
+            font-family: 'Georgia', serif;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+        }
+
+        .rsvp-form textarea {
+            resize: vertical;
+            background: rgba(255, 255, 255, 0.514); 
+        }
+
+        .rsvp-form input[type="submit"] {
+            background-color: #6F8260;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Georgia', serif;
+            margin-top: 20px;
+            align-self: center;
+            transition: background-color 0.3s;
+        }
+
+        .rsvp-form input[type="submit"]:hover {
+            background-color:#46543c ;
+        }
+
+        /* Placeholder images */
+        .placeholder-img {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #e8e4d8, #d1ccbd);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #766425;
+            font-style: italic;
+            border: 4px solid #766425;
+        }
+        
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 393px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(249, 246, 240, 0.9);
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-btn {
+            padding: 10px 15px;
+            background-color: #6F8260;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            font-size: 14px;
+        }
+        
+        .nav-btn:hover {
+            background-color: #46543c;
+        }
+        
+        /* Media Queries untuk responsivitas */
+        @media (max-width: 393px) {
+            .container1, .page-container {
+                border-radius: 0;
+                box-shadow: none;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .countdown-timer {
+                gap: 5px;
+            }
+            
+            .countdown-timer div {
+                width: 60px;
+                padding: 5px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .title {
+                font-size: 24px;
+            }
+            
+            .open-button {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .countdown-timer div {
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Halaman Pertama -->
+    <div id="firstpage" class="container1">
+        <h1 class="title">The Wedding Of</h1>
+        <center>
+            <div class="bridegroom-names">Arka<br> & <br> Ayu <p class="tanggal">8.oktober.2029</p></div>
+        
+            <img class="decoration2" src=".7.png" alt="Hiasan">
+            <img class="decoration3" src=".8.png" alt="Hiasan">
+            <img class="decoration1" src=".4.png" alt="Hiasan">
+            <img class="decoration4" src="decoration_00.png" alt="Hiasan">
+            
+            <p class="p"><br>Yth.<br>Penerima Undangan</p>
+            <button class="open-button" id="openButton">Open Invitation</button>
+        </center>
+    </div>
+
+    <!-- Container untuk halaman lainnya -->
+    <div id="otherPages" class="other-pages">
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <button class="nav-btn" id="prevBtn">Previous</button>
+            <button class="nav-btn" id="nextBtn">Next</button>
+        </div>
+        
+        <!-- Halaman Kedua -->
+        <div class="page-container">
+            <div id="secondpage" class="second-page">
+                <h2>Dasar Pernikahan</h2>
+                <h3><p>وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ 
+                    بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةًۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ</p></h3> 
+                <p>Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.</p>
+                <p><b>- Ar-Rum · Ayat 21 -</b></p> 
+
+                <img class="decoration5" src="decoration_00.png" alt="Hiasan">
+            </div>
+        </div>
+        
+        <!-- Halaman Countdown -->
+        <div class="page-container">
+            <div id="countdown-page" class="countdown-page">
+                <h2 class="h11">Wedding Event</h2>
+                <h4 class="h12"> Minggu, 8 Oktober 2029 </h4>
+                <p class="h13">Kami mengundang Anda untuk hadir di hari istimewa kami. Hitung mundur bersama menuju momen suci yang akan mengikat kami dalam pernikahan.</p>
+                <div id="countdown" class="countdown-timer">
+                    <div class="days"><span id="days">0</span> days </div>
+                    <div class="hours"><span id="hours">0</span> hours</div>
+                    <div class="minutes"><span id="minutes">0</span> minutes</div>
+                    <div class="seconds"><span id="seconds">0</span> seconds</div>
+                </div>
+                
+                <div class="title-section">
+                    <h3>Love Story</h3>
+                </div>
+                <div class="image-section">
+                    <div class="placeholder-img">Our Photo</div>
+                </div>
+                <div class="date-section">
+                    <h2>Juli 2019</h2>
+                </div>
+                <div class="quote-section">
+                    <p>"Tidak ada pasangan yang benar benar cocok, yang ada ialah pasangan yang hatinya begitu luas untuk menerima ketidak cocokan."</p>
+                </div>
+            </div>
+        </div>
+
+        <!--Halaman ketiga-->
+        <div class="page-container">
+            <div id="thirdpage" class="third-page">
+                <h3 class="name123">Assalamualaikum Wr. Wb.</h3>
+                <p class="name">Dengan segala kerendahan hati,<br>kami mengundang Bapak/Ibu/Saudara<br> untuk menghadiri pernikahan kami.</p>
+                
+                <div class="invitation-container">
+                    <div class="names">
+                        <h3>Arka Annur<br>Musharifa Enggok</h3>
+                        <p>Putra pertama dari Azhar Arif dan Siska Shintani</p>
+                    </div>
+                    
+                    <div class="photo-section">
+                        <div class="photo-frame">
+                            <div class="placeholder-img">Groom</div>
+                            <div class="placeholder-img">Bride</div>
+                        </div>
+                        <div class="and-symbol">&</div>
+                    </div>
+                    <div class="names">
+                        <h3>Setya Ayu<br>Nurita Sari</h3>
+                        <p>Putri kedua dari Kusnuri dan Sulastri</p>
+                    </div>
+                </div>
+            </div>      
+        </div>
+        
+        <!-- Halaman Keempat -->
+        <div class="page-container">
+            <div id="fourthpage" class="fourth-page">
+                <div class="content">
+                    <h2 class="section-title">Akad Pernikahan</h2>
+                    <p class="text4"><b>Sabtu, 8 Oktober 2029</b><br>Pukul 08:00 WIB - 10:00 WIB<br>Jalan Gunung Batur, No. 78, Denpasar, Bali</p>
+
+                    <h2 class="section-title">Resepsi Pernikahan</h2>
+                    <p class="text4"><b>Sabtu, 8 Oktober 2029</b><br>Pukul 11:00 WIB - 14:00 WIB<br>Grand Ballroom, Hotel Saranjana</p>
+
+                    <h2 class="section-title">Makan Malam</h2>
+                    <p class="text4"><b>Sabtu, 8 Oktober 2029</b><br>Pukul 18:00 WIB - 21:00 WIB<br>Restoran Makan Padang</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Halaman kelima -->
+        <div class="page-container">
+            <section class="gallery-section">
+                <h2 class="gallery-title">Our Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="placeholder-img">Foto 1</div>
+                        <a href="#" class="gallery-link">Lihat foto lainnya</a>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-img">Foto 2</div>
+                        <a href="#" class="gallery-link">Lihat foto lainnya</a>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-img">Foto 3</div>
+                        <a href="#" class="gallery-link">Lihat foto lainnya</a>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-img">Foto 4</div>
+                        <a href="#" class="gallery-link">Lihat foto lainnya</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!--halaman rsvp-->
+        <div class="page-container">
+            <div id="rsvp-page" class="rsvp-page">
+                <h2>RSVP</h2>
+                <p class="rsvp-text">
+                    Kami sangat menghargai kehadiran Anda. Silakan konfirmasi kehadiran Anda melalui form di bawah ini:
+                </p>
+                <form id="rsvpForm" class="rsvp-form">
+                    <label for="name">Nama:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="attendance">Apakah Anda akan hadir?</label>
+                    <select id="attendance" name="attendance" required>
+                        <option value="yes">Ya, saya akan hadir</option>
+                        <option value="no">Maaf, saya tidak bisa hadir</option>
+                    </select>
+
+                    <label for="guests">Jumlah tamu yang hadir:</label>
+                    <input type="number" id="guests" name="guests" min="1" required>
+
+                    <label for="message">Pesan atau Doa:</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+
+                    <input type="submit" value="Kirim RSVP">
+                </form>
+                <div id="thankYouMessage" style="display: none; text-align: center; margin-top: 20px;">
+                    <p style="color: #6F8260; font-weight: bold;">Terima kasih! RSVP Anda telah terkirim.</p>
+                </div>
+            </div>
+        </div>
+
+        <!--Halaman keenam-->
+        <div class="page-container">
+            <div id="sixthpage" class="thankyou-container">
+                <div>
+                    <p class="thankyou-subtext">Merupakan Suatu Kebahagiaan dan Kehormatan bagi Kami, Apabila Bapak/Ibu/Saudara/i, Berkenan Hadir di Acara kami</p>
+                    <p class="thankyou-subtext">Atas perhatiannya Terima kasih</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables to track current page
+        let currentPageIndex = 0;
+        const pages = document.querySelectorAll('.page-container');
+        
+        // Initialize the page
+        document.addEventListener("DOMContentLoaded", function() {
+            // Animate decorations on first page
+            const decorations = document.querySelectorAll('.decoration1, .decoration2, .decoration3, .decoration4');
+            decorations.forEach((decoration, index) => {
+                setTimeout(() => {
+                    decoration.style.opacity = '1';
+                }, index * 200);
+            });
+            
+            // Set up navigation buttons
+            document.getElementById('prevBtn').addEventListener('click', goToPreviousPage);
+            document.getElementById('nextBtn').addEventListener('click', goToNextPage);
+            
+            // Handle open invitation button click
+            document.getElementById('openButton').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Show other pages with animation
+                document.getElementById('otherPages').classList.add('visible');
+                
+                // Hide the first page
+                document.getElementById('firstpage').style.display = 'none';
+                
+                // Start the countdown
+                startCountdown();
+                
+                // Scroll to the first page of the invitation
+                pages[0].scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Handle RSVP form submission
+            document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                document.getElementById('thankYouMessage').style.display = 'block';
+                this.reset();
+                setTimeout(() => {
+                    document.getElementById('thankYouMessage').style.display = 'none';
+                }, 3000);
+            });
+        });
+        
+        // Countdown timer
+        function startCountdown() {
+            const weddingDate = new Date("October 8, 2029 00:00:00").getTime();
+            
+            const countdownFunction = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById("days").innerText = days;
+                document.getElementById("hours").innerText = hours;
+                document.getElementById("minutes").innerText = minutes;
+                document.getElementById("seconds").innerText = seconds;
+                
+                if (distance < 0) {
+                    clearInterval(countdownFunction);
+                    document.getElementById("countdown").innerHTML = "The Wedding Day is Here!";
+                }
+            }, 1000);
+        }
+        
+        // Navigation functions
+        function goToNextPage() {
+            if (currentPageIndex < pages.length - 1) {
+                currentPageIndex++;
+                pages[currentPageIndex].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        function goToPreviousPage() {
+            if (currentPageIndex > 0) {
+                currentPageIndex--;
+                pages[currentPageIndex].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Track scroll position to update current page index
+        let isScrolling = false;
+        
+        window.addEventListener('scroll', () => {
+            if (!isScrolling) {
+                window.requestAnimationFrame(() => {
+                    const scrollPosition = window.scrollY + (window.innerHeight / 2);
+                    
+                    pages.forEach((page, index) => {
+                        const pageTop = page.offsetTop;
+                        const pageBottom = pageTop + page.offsetHeight;
+                        
+                        if (scrollPosition >= pageTop && scrollPosition < pageBottom) {
+                            currentPageIndex = index;
+                        }
+                    });
+                    
+                    isScrolling = false;
+                });
+                
+                isScrolling = true;
+            }
+        });
+    </script>
+</body>
+</html>
