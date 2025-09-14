@@ -707,6 +707,41 @@
             margin-bottom: 4px;
         }
 
+        /* Tombol Musik Circle */
+        .music-control {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #6F8260;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .music-control.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .music-control:hover {
+            background-color: #46543c;
+            transform: scale(1.1);
+        }
+
+        .music-control i {
+            font-size: 20px;
+        }
+
         /* Media Queries untuk responsivitas */
         @media (max-width: 393px) {
 
@@ -743,6 +778,13 @@
             .nav-btn i {
                 font-size: 16px;
             }
+
+            .music-control {
+                bottom: 70px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
         }
 
         @media (max-width: 320px) {
@@ -775,6 +817,17 @@
             .nav-btn i {
                 font-size: 14px;
             }
+
+            .music-control {
+                bottom: 65px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .music-control i {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -801,7 +854,7 @@
     <div id="otherPages" class="other-pages">
         <!-- Halaman Kedua -->
         <div class="page-container" id="secondpage">
-            <div class="second-page">
+            <div class="second-page" style="margin-top: auto;">
                 <h2>Dasar Pernikahan</h2>
                 <h3>
                     <p>وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا
@@ -826,10 +879,10 @@
                 <p class="h13">Kami mengundang Anda untuk hadir di hari istimewa kami. Hitung mundur bersama menuju
                     momen suci yang akan mengikat kami dalam pernikahan.</p>
                 <div id="countdown" class="countdown-timer">
-                    <div class="days"><span id="days">0</span> days </div>
-                    <div class="hours"><span id="hours">0</span> hours</div>
-                    <div class="minutes"><span id="minutes">0</span> minutes</div>
-                    <div class="seconds"><span id="seconds">0</span> seconds</div>
+                    <div class="days"><span id="days">00</span> days </div>
+                    <div class="hours"><span id="hours">00</span> hours</div>
+                    <div class="minutes"><span id="minutes">00</span> minutes</div>
+                    <div class="seconds"><span id="seconds">00</span> seconds</div>
                 </div>
 
                 <div class="title-section">
@@ -970,10 +1023,11 @@
                     <h4>Terima Kasih atas kehadiran anda</h4>
                     <p class="thankyou-subtext">Merupakan Suatu Kebahagiaan dan Kehormatan bagi Kami, Apabila
                         Bapak/Ibu/Saudara/i, Berkenan Hadir di Acara kami</p>
-                        <br>
+                    <br>
                     <p class="thankyou-subtext">Atas perhatiannya Terima kasih</p>
                     <div>
-                        <h3 style="font-family: 'Allura', cursive; font-size: 26px; color: #766425; margin-top: 20px; text-align: center;">
+                        <h3
+                            style="font-family: 'Allura', cursive; font-size: 26px; color: #766425; margin-top: 20px; text-align: center;">
                             Arka & Ayu
                         </h3>
                     </div>
@@ -1016,11 +1070,22 @@
         </div>
     </div>
 
+    <!-- Tombol Musik Control -->
+    <button class="music-control" id="musicToggle">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <audio id="bg-music" loop>
+        <source src="/music/Ini-Cinta.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
     <!-- Modal untuk gambar galeri -->
     <div id="imageModal" class="modal">
         <span class="close" id="closeModal">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
+
 
     <script>
         // Variables to track current page
@@ -1028,6 +1093,11 @@
         const pages = document.querySelectorAll('.page-container');
         const navButtons = document.querySelectorAll('.nav-btn');
         const navContainer = document.getElementById('navButtons');
+
+        // Variables untuk kontrol musik
+        let musicPlaying = false;
+        const music = document.getElementById("bg-music");
+        const musicToggle = document.getElementById("musicToggle");
 
         // Initialize the page
         document.addEventListener("DOMContentLoaded", function () {
@@ -1055,6 +1125,9 @@
 
                     // Show navigation with slide up animation
                     navContainer.classList.add('visible');
+
+                    // Show music control button
+                    document.getElementById('musicToggle').classList.add('visible');
 
                     // Start the countdown
                     startCountdown();
@@ -1093,7 +1166,36 @@
 
             // Setup gallery item click events
             setupGalleryModal();
+
+            // Setup music control click event
+            musicToggle.addEventListener('click', toggleMusic);
         });
+
+        // Fungsi untuk toggle musik
+        function toggleMusic() {
+            if (musicPlaying) {
+                music.pause();
+                musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+                musicToggle.style.opacity = "0.7";
+            } else {
+                // Coba memutar musik
+                const playPromise = music.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        // Musik berhasil diputar
+                        musicPlaying = true;
+                        musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+                        musicToggle.style.opacity = "1";
+                    }).catch(error => {
+                        // Jika autoplay diblokir, beri tahu pengguna
+                        console.log("Autoplay prevented:", error);
+                        alert("Silakan klik tombol musik untuk memutar musik. Beberapa browser memerlukan interaksi pengguna terlebih dahulu.");
+                    });
+                }
+            }
+            musicPlaying = !musicPlaying;
+        }
 
         // Setup gallery modal functionality
         function setupGalleryModal() {
@@ -1149,10 +1251,11 @@
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                document.getElementById("days").innerText = days;
-                document.getElementById("hours").innerText = hours;
-                document.getElementById("minutes").innerText = minutes;
-                document.getElementById("seconds").innerText = seconds;
+                // Format dengan leading zero
+                document.getElementById("days").innerText = days.toString().padStart(2, '0');
+                document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
 
                 if (distance < 0) {
                     clearInterval(countdownFunction);
