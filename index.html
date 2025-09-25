@@ -970,32 +970,59 @@
         </div>
 
         <!-- GALERI BARU DENGAN 6 KOTAK IMAGE -->
+        <div id="imageModal" class="modal">
+            <span class="close" id="closeModal">&times;</span>
+            <span class="modal-arrow modal-prev" id="modalPrev"
+                style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:40px;color:white;cursor:pointer;user-select:none;">&#8592;</span>
+            <img class="modal-content" id="modalImage">
+            <span class="modal-arrow modal-next" id="modalNext"
+                style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:40px;color:white;cursor:pointer;user-select:none;">&#8594;</span>
+        </div>
+
         <div class="page-container" id="newgallery">
             <section class="new-gallery-section">
                 <h2 class="new-gallery-title">Our Memories</h2>
                 <div class="new-gallery-grid">
                     <div class="new-gallery-item">
-                        <div class="gallery-img-placeholder"><img
-                                src="https://i.pinimg.com/736x/45/6c/07/456c0764fef6bfd6d4ab12ffa55907f2.jpg" style="background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+                        <div class="gallery-img-placeholder" style="padding:0;">
+                            <img src="https://i.pinimg.com/736x/45/6c/07/456c0764fef6bfd6d4ab12ffa55907f2.jpg"
+                                alt="Memories 1" style="width:100%;height:100%;object-fit:cover;">
+                        </div>
                     </div>
                     <div class="new-gallery-item">
-                        <div class="gallery-img-placeholder">Foto 2</div>
+                        <div class="gallery-img-placeholder" style="padding:0;">
+                            <img src="https://i.pinimg.com/1200x/88/32/1d/88321d4fde2d42f5a26ecf1ebdf93488.jpg"
+                                alt="Memories 2" style="width:100%;height:100%;object-fit:cover;">
+                        </div>
                     </div>
                     <div class="new-gallery-item">
-                        <div class="gallery-img-placeholder">Foto 3</div>
+                        <div class="gallery-img-placeholder" style="padding:0;">
+                            <img src="https://i.pinimg.com/1200x/46/eb/d4/46ebd40382088edb56c91a9f05347df1.jpg"
+                                alt="Memories 3" style="width:100%;height:100%;object-fit:cover;">
+                        </div>
                     </div>
                     <div class="new-gallery-item">
-                        <div class="gallery-img-placeholder">Foto 4</div>
+                        <div class="gallery-img-placeholder" style="padding:0;">
+                            <img src="https://i.pinimg.com/1200x/72/a0/88/72a088fbce23fb721b7ac3c9ac856aa7.jpg"
+                                alt="Memories 4" style="width:100%;height:100%;object-fit:cover;">
+                        </div>
                     </div>
                     <div class="new-gallery-item">
-                        <div class="gallery-img-placeholder">Foto 5</div>
+                        <div class="gallery-img-placeholder" style="padding:0;">
+                            <img src="https://i.pinimg.com/1200x/20/d5/da/20d5da4cb6523fbbdc42e46d39d74882.jpg"
+                                alt="Memories 5" style="width:100%;height:100%;object-fit:cover;">
+                        </div>
                     </div>
                     <div class="new-gallery-item">
-                        <div class="gallery-img-placeholder">Foto 6</div>
+                        <div class="gallery-img-placeholder" style="padding:0;">
+                            <img src="https://i.pinimg.com/736x/3c/02/e3/3c02e3ec1647a4a9ff71daa2277ec1b6.jpg"
+                                alt="Memories 6" style="width:100%;height:100%;object-fit:cover;">
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
+
 
         <!--halaman rsvp-->
         <div class="page-container" id="rsvp-page">
@@ -1154,6 +1181,117 @@
                     updateActiveNavButton(0);
                 }, 800);
             });
+
+            function setupGalleryModal() {
+                const modal = document.getElementById("imageModal");
+                const modalImg = document.getElementById("modalImage");
+                const closeModal = document.getElementById("closeModal");
+                // Get all gallery items
+                const galleryItems = document.querySelectorAll('.new-gallery-item, .gallery-item');
+                // Add click event to each gallery item
+                galleryItems.forEach(item => {
+                    item.addEventListener('click', function () {
+                        // Cari <img> di dalam item yang diklik
+                        const img = item.querySelector('img');
+                        if (img) {
+                            modal.style.display = "flex";
+                            modalImg.src = img.src;
+                            modalImg.alt = img.alt || "Wedding Photo";
+                        } else {
+                            // fallback
+                            modal.style.display = "flex";
+                            modalImg.src = "https://i.pinimg.com/736x/45/6c/07/456c0764fef6bfd6d4ab12ffa55907f2.jpg";
+                            modalImg.alt = "Wedding Photo";
+                        }
+                    });
+                });
+                closeModal.addEventListener('click', function () {
+                    modal.style.display = "none";
+                });
+                modal.addEventListener('click', function (e) {
+                    if (e.target === modal) {
+                        modal.style.display = "none";
+                    }
+                });
+            }
+
+            function setupGalleryModal() {
+                const modal = document.getElementById("imageModal");
+                const modalImg = document.getElementById("modalImage");
+                const closeModal = document.getElementById("closeModal");
+                const prevArrow = document.getElementById("modalPrev");
+                const nextArrow = document.getElementById("modalNext");
+                // Get all gallery items
+                const galleryItems = document.querySelectorAll('.new-gallery-item, .gallery-item');
+                let currentIndex = 0;
+
+                // Helper function to show image at index
+                function showImage(index) {
+                    const item = galleryItems[index];
+                    if (item) {
+                        const img = item.querySelector('img');
+                        modal.style.display = "flex";
+                        if (img) {
+                            modalImg.src = img.src;
+                            modalImg.alt = img.alt || "Wedding Photo";
+                        } else {
+                            modalImg.src = "https://i.pinimg.com/736x/45/6c/07/456c0764fef6bfd6d4ab12ffa55907f2.jpg";
+                            modalImg.alt = "Wedding Photo";
+                        }
+                        currentIndex = index;
+                    }
+                }
+
+                // Add click event to each gallery item
+                galleryItems.forEach((item, idx) => {
+                    item.addEventListener('click', function () {
+                        showImage(idx);
+                    });
+                });
+
+                // Close modal
+                closeModal.addEventListener('click', function () {
+                    modal.style.display = "none";
+                });
+
+                // Close modal when clicking outside the image
+                modal.addEventListener('click', function (e) {
+                    if (e.target === modal) {
+                        modal.style.display = "none";
+                    }
+                });
+
+                // Arrow navigation
+                prevArrow.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    let prevIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                    showImage(prevIndex);
+                });
+                nextArrow.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    let nextIndex = (currentIndex + 1) % galleryItems.length;
+                    showImage(nextIndex);
+                });
+
+                // Optional: Keyboard navigation
+                document.addEventListener('keydown', function (e) {
+                    if (modal.style.display === "flex") {
+                        if (e.key === "ArrowLeft") {
+                            let prevIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                            showImage(prevIndex);
+                        }
+                        if (e.key === "ArrowRight") {
+                            let nextIndex = (currentIndex + 1) % galleryItems.length;
+                            showImage(nextIndex);
+                        }
+                        if (e.key === "Escape") {
+                            modal.style.display = "none";
+                        }
+                    }
+                });
+            }
+
+
 
             // Arrow Functionality
             window.addEventListener('keydown', (e) => {
